@@ -80,7 +80,8 @@ var ballArray = [];
 function init() {
 	for (var i = 0; i < 500; i++) {
 		var x = randomIntFromRange(0, canvas.width);
-		ballArray.push(new Ball(x, 200, 2, 30, 'red'));
+		var y = randomIntFromRange(0, canvas.height);
+		ballArray.push(new Ball(x, y, 2, 30, 'red'));
 	}	
 }
 
