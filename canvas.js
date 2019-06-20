@@ -45,14 +45,18 @@ function randomColor(colors) {
 
 
 // Objects
-function Ball(x, y, radius, color) {
+function Ball(x, y, dy, radius, color) {
 	this.x = x;
 	this.y = y;
+	this.dy = dy;
 	this.radius = radius;
 	this.color = color;
 
 	this.update = function() {
-		this.y += 1;
+		if (this.y + this.radius > canvas.height) {
+			this.dy = -this.dy;
+		}
+		this.y += this.dy;
 		this.draw();
 	};
 
@@ -69,7 +73,7 @@ function Ball(x, y, radius, color) {
 // Implementation
 var ball;
 function init() {
-	ball = new Ball(canvas.width / 2, canvas.height / 2, 30, 'red');
+	ball = new Ball(canvas.width / 2, canvas.height / 2, 2, 30, 'red');
 	console.log(ball);
 }
 
