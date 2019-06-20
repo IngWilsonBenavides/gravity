@@ -35,6 +35,10 @@ addEventListener("resize", function() {
 	init();
 });
 
+addEventListener("click", function() {
+	init();
+});
+
 
 // Utility Functions
 function randomIntFromRange(min,max) {
@@ -62,6 +66,11 @@ function Ball(x, y, dx, dy, radius, color) {
 			this.dy += gravity;
 		}
 
+		if (this.x + this.radius + this.dx > canvas.width || 
+			this.x - this.radius <= 0) {
+			this.dx = -this.dx;
+		}
+
 		this.x += this.dx;
 		this.y += this.dy;
 		this.draw();
@@ -79,15 +88,17 @@ function Ball(x, y, dx, dy, radius, color) {
 
 
 // Implementation
-var ball;
-var ballArray = [];
+var ballArray;
 function init() {
-	var radius = 30;
+	ballArray = [];
 	for (var i = 0; i < 100; i++) {
-		var x = randomIntFromRange(0, canvas.width);
+		var radius = randomIntFromRange(15, 20);
+		var x = randomIntFromRange(radius, canvas.width - radius);
 		var y = randomIntFromRange(0, canvas.height - radius);
 		var dx = randomIntFromRange(-2, 2);
-		ballArray.push(new Ball(x, y, dx, 2, radius, 'red'));
+		var dy = randomIntFromRange(-2, 2);
+		var color = randomColor(colors);
+		ballArray.push(new Ball(x, y, dx, dy, radius, color));
 	}	
 }
 
