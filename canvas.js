@@ -47,19 +47,22 @@ function randomColor(colors) {
 
 
 // Objects
-function Ball(x, y, dy, radius, color) {
+function Ball(x, y, dx, dy, radius, color) {
 	this.x = x;
 	this.y = y;
+	this.dx = dx;
 	this.dy = dy;
 	this.radius = radius;
 	this.color = color;
 
 	this.update = function() {
-		if (this.y + this.radius > canvas.height) {
+		if (this.y + this.radius + this.dy > canvas.height) {
 			this.dy = -this.dy * friction;
 		} else {
 			this.dy += gravity;
 		}
+
+		this.x += this.dx;
 		this.y += this.dy;
 		this.draw();
 	};
@@ -69,6 +72,7 @@ function Ball(x, y, dy, radius, color) {
 		c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);	
 		c.fillStyle = this.color;
 		c.fill();
+		c.stroke();
 		c.closePath();
 	};
 }
@@ -78,10 +82,12 @@ function Ball(x, y, dy, radius, color) {
 var ball;
 var ballArray = [];
 function init() {
-	for (var i = 0; i < 500; i++) {
+	var radius = 30;
+	for (var i = 0; i < 100; i++) {
 		var x = randomIntFromRange(0, canvas.width);
-		var y = randomIntFromRange(0, canvas.height);
-		ballArray.push(new Ball(x, y, 2, 30, 'red'));
+		var y = randomIntFromRange(0, canvas.height - radius);
+		var dx = randomIntFromRange(-2, 2);
+		ballArray.push(new Ball(x, y, dx, 2, radius, 'red'));
 	}	
 }
 
