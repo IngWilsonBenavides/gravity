@@ -45,7 +45,7 @@ function randomColor(colors) {
 
 
 // Objects
-function Object(x, y, radius, color) {
+function Ball(x, y, radius, color) {
 	this.x = x;
 	this.y = y;
 	this.radius = radius;
@@ -67,8 +67,10 @@ function Object(x, y, radius, color) {
 
 
 // Implementation
+var ball;
 function init() {
-
+	ball = new Ball(canvas.width / 2, canvas.height / 2, 30, 'red');
+	console.log(ball);
 }
 
 // Animation Loop
@@ -76,7 +78,7 @@ function animate() {
 	requestAnimationFrame(animate);
 
 	c.clearRect(0, 0, canvas.width, canvas.height);
-	c.fillText("HTML CANVAS BOILERPLATE", mouse.x, mouse.y);
+	ball.update();
 }
 
 init();
