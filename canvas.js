@@ -52,7 +52,7 @@ function Ball(x, y, radius, color) {
 	this.color = color;
 
 	this.update = function() {
-		
+		this.y += 1;
 		this.draw();
 	};
 
